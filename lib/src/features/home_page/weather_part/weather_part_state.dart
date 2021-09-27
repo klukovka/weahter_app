@@ -6,15 +6,15 @@ import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dar
 
 class WeatherPartState extends Equatable {
   WeatherPartState({
-    required this.coordinates,
-    required this.loading,
+    this.coordinates,
+    this.loading = true,
     this.weatherMode = WeatherMode.daily,
     this.dailyWeather,
     this.error,
     this.hourlyWeather,
   });
 
-  final Coordinates coordinates;
+  final Coordinates? coordinates;
   final WeatherMode weatherMode;
   final List<DailyWeather>? dailyWeather;
   final List<HourlyWeather>? hourlyWeather;
@@ -36,7 +36,7 @@ class WeatherPartState extends Equatable {
     WeatherMode? weatherMode,
     List<DailyWeather>? dailyWeather,
     List<HourlyWeather>? hourlyWeather,
-    required bool loading,
+    bool loading = false,
     String? error,
   }) {
     return new WeatherPartState(

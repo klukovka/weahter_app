@@ -1,7 +1,7 @@
-import 'package:weather_app/domain/interactors/base_interactor.dart';
-import 'package:weather_app/domain/models/coordinates.dart';
-import 'package:weather_app/domain/models/hourly_weather.dart';
-import 'package:weather_app/domain/repositories/hourlyWeatherRepository.dart';
+import 'package:weather_app/src/domain/interactors/base_interactor.dart';
+import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/repositories/hourly_weather_repository.dart';
 
 class GetHourlyWeatherInteractor
     implements BaseInteractor<Coordinates, List<HourlyWeather>> {

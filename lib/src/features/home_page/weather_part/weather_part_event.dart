@@ -13,10 +13,13 @@ class WeatherPartCoordinateEvent extends WeatherPartEvent {
 }
 
 class WeatherPartModeEvent extends WeatherPartEvent {
-  WeatherPartModeEvent([this.weatherMode = WeatherMode.daily]);
+  WeatherPartModeEvent(
+    this.coordinates, [
+    this.weatherMode = WeatherMode.daily,
+  ]);
   final WeatherMode weatherMode;
+  final Coordinates coordinates;
 
   @override
-  List<Object?> get props => [weatherMode];
+  List<Object?> get props => [weatherMode, coordinates];
 }
-

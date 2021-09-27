@@ -9,6 +9,8 @@ class GetCityInteractor implements BaseInteractor<Coordinates, City> {
 
   @override
   Future<City> call(Coordinates coordinates) {
-    return _repository.getCity(coordinates);
+    throw Error();
+    //TODO implement method
+    //return _repository.getCity(coordinates);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:weather_app/domain/interactors/base_interactor.dart';
 import 'package:weather_app/domain/models/city.dart';
 import 'package:weather_app/domain/models/coordinates.dart';
-import 'package:weather_app/domain/repositories/cityRepository.dart';
+import 'package:weather_app/domain/repositories/city_repository.dart';
 
 class GetCityInteractor implements BaseInteractor<Coordinates, City> {
   GetCityInteractor(this._repository);

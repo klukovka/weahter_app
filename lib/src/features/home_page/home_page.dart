@@ -41,6 +41,9 @@ class _HomePageState extends State<HomePage> {
         }),
       ],
       child: Scaffold(
+        appBar: AppBar(
+          title: Text('Weather App'),
+        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

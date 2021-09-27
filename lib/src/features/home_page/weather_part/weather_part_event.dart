@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dart';
 
 abstract class WeatherPartEvent extends Equatable {}
 
@@ -19,4 +20,3 @@ class WeatherPartModeEvent extends WeatherPartEvent {
   List<Object?> get props => [weatherMode];
 }
 
-enum WeatherMode { daily, hourly }

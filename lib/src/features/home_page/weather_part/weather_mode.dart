@@ -1,0 +1,2 @@
+enum WeatherMode { daily, hourly }
+

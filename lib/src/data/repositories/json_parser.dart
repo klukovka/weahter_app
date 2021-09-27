@@ -10,7 +10,7 @@ class JsonParser {
   static City parseJsonToCity(Map<String, dynamic> json) {
     return new City(
       country: json['sys']['country'],
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
       coordinates: _parseJsonToCoordinates(json['coord']),
     );

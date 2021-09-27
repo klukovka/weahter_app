@@ -18,6 +18,7 @@ class GetCityInteractor implements BaseInteractor<Coordinates, City> {
 
     for (int i = 1; i < cities.length; i++) {
       final distance = _calculateDistance(cities[i], coordinates);
+      print(distance);
       if (distance < minDistance) {
         minDistance = distance;
         minDistanceCity = cities[i];

@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import 'package:weather_app/src/data/repositories/city_open_weather_repository.dart';
 import 'package:weather_app/src/domain/interactors/get_city_interactor.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/features/home_page/city_part/city_part.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
+import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,13 +17,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late LocationData _currentPosition;
   Coordinates coordinates = new Coordinates(50.4333, 30.5167);
 
   @override
   void initState() {
     super.initState();
-    _getLoc();
   }
 
   void sendEvent<B extends Bloc, E>(BuildContext context, E event) {
@@ -32,15 +32,31 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider<CityPartBloc>(
-          create: (context) => CityPartBloc(
+        BlocProvider<CityPartBloc>(create: (context) {
+          final bloc = CityPartBloc(
             new GetCityInteractor(new CityOpenWeatherRepository()),
-          ),
-        ),
+          );
+          _getLoc().then((value) => bloc.add(new CityPartEvent(coordinates)));
+          return bloc;
+        }),
       ],
-      child: Scaffold(   body: Center(
-        child: Text('${coordinates.latitude}:${coordinates.longitude}'),
-      ),),
+      child: Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Flexible(
+              child: CityPart(),
+              flex: 1,
+            ),
+            Flexible(
+              child: Container(
+                color: Colors.amber,
+              ),
+              flex: 4,
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -65,18 +81,14 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    _currentPosition = await location.getLocation();
-
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      setState(() {
-        _currentPosition = currentLocation;
-        try {
-          coordinates = new Coordinates(
-              currentLocation.latitude!, currentLocation.longitude!);
-        } on Exception {
-          //TODO
-        }
-      });
+    final currentLocation = await location.getLocation();
+    setState(() {
+      try {
+        coordinates = new Coordinates(
+            currentLocation.latitude!, currentLocation.longitude!);
+      } on Exception {
+        //TODO
+      }
     });
   }
 }

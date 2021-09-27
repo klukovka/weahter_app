@@ -8,8 +8,8 @@ class CityOpenWeatherRepository implements CityRepository {
   final openWeatherApi = OpenWeatherApi();
   @override
   Future<List<City>> getCities(Coordinates coordinates) async {
-    final cities = await openWeatherApi.fetchCities(coordinates);
-    return cities.map((city) =>JsonParser.parseJsonToCity(city));
+    final cities = (await openWeatherApi.fetchCities(coordinates))['list'];
+    final mappedCities = cities.map<City>((city) => JsonParser.parseJsonToCity(city));
+    return mappedCities.toList();
   }
-
 }

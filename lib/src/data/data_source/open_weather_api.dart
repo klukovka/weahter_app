@@ -10,6 +10,13 @@ class OpenWeatherApi {
   static const _authority = 'api.openweathermap.org';
 
   Future<dynamic> fetchCities(Coordinates coordinates) async {
+    print(Uri.https(
+      _authority,
+      _buildPath('find'), {
+        'units': 'metric',
+        'lang': 'en',
+        'appid': accessKey,
+      }));
     final response = await http.get(Uri.https(
       _authority,
       _buildPath('find'),
@@ -18,7 +25,7 @@ class OpenWeatherApi {
     return _checkResponse(response);
   }
 
-  Future<dynamic> fetchWeather(String exclude,Coordinates coordinates) async {
+  Future<dynamic> fetchWeather(String exclude, Coordinates coordinates) async {
     final response = await http.get(Uri.https(
       _authority,
       _buildPath('onecall'),
@@ -33,9 +40,9 @@ class OpenWeatherApi {
 
   String _buildPath(String path) => '/data/2.5/$path';
 
-  Map<String, dynamic> _baseQuery (Coordinates coordinates) => {
-        'lat': coordinates.latitude,
-        'lon': coordinates.longitude,
+  Map<String, dynamic> _baseQuery(Coordinates coordinates) => {
+        'lat': '${coordinates.latitude}',
+        'lon': '${coordinates.longitude}',
         'units': 'metric',
         'lang': 'en',
         'appid': accessKey,

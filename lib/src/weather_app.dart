@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/features/coordinates_screen.dart';
+import 'package:weather_app/src/features/coordinates_screen.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({Key? key}) : super(key: key);

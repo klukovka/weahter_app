@@ -1,10 +1,10 @@
-import 'package:weather_app/domain/models/city.dart';
-import 'package:weather_app/domain/models/coordinates.dart';
-import 'package:weather_app/domain/models/daily_weather.dart';
-import 'package:weather_app/domain/models/feels_like.dart';
-import 'package:weather_app/domain/models/hourlyWeather.dart';
-import 'package:weather_app/domain/models/temperature.dart';
-import 'package:weather_app/domain/models/weather.dart';
+import 'package:weather_app/src/domain/models/city.dart';
+import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/domain/models/daily_weather.dart';
+import 'package:weather_app/src/domain/models/feels_like.dart';
+import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/models/temperature.dart';
+import 'package:weather_app/src/domain/models/weather.dart';
 
 class JsonParser {
   static City parseJsonToCity(Map<String, dynamic> json) {

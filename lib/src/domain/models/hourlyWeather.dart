@@ -1,23 +1,17 @@
 import 'package:equatable/equatable.dart';
-import 'package:weather_app/domain/models/feels_like.dart';
-import 'package:weather_app/domain/models/temperature.dart';
-import 'package:weather_app/domain/models/weather.dart';
+import 'package:weather_app/src/domain/models/weather.dart';
 
-class DailyWeather extends Equatable {
-  DailyWeather({
-    required this.clouds,
+class HourlyWeather extends Equatable {
+  HourlyWeather({
+    required this.clounds,
     required this.dewPoint,
     required this.dt,
     required this.feelsLike,
     required this.humidity,
-    required this.moonPhase,
-    required this.moonrise,
-    required this.moonset,
     required this.precipitationProbability,
     required this.pressure,
-    required this.sunrise,
-    required this.sunset,
     required this.temperature,
+    required this.visibility,
     required this.weather,
     required this.windDeg,
     required this.windSpeed,
@@ -25,23 +19,18 @@ class DailyWeather extends Equatable {
     this.snow,
     this.windGust,
   });
-
   
   final DateTime dt;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final DateTime moonrise;
-  final DateTime moonset;
-  final double moonPhase;
-  final Temperature temperature;
-  final FeelsLike feelsLike;
+  final double temperature;
+  final double feelsLike;
   final int pressure;
   final int humidity;
   final double dewPoint;
+  final int clounds;
+  final int visibility;
   final double windSpeed;
-  final double windDeg;
   final double? windGust;
-  final int clouds;
+  final double windDeg;
   final double precipitationProbability;
   final double? rain;
   final double? snow;
@@ -49,21 +38,17 @@ class DailyWeather extends Equatable {
 
   @override
   List<Object?> get props => [
-        clouds,
+        clounds,
         dewPoint,
         dt,
         feelsLike,
         humidity,
-        moonPhase,
-        moonrise,
-        moonset,
         precipitationProbability,
         pressure,
         rain,
         snow,
-        sunrise,
-        sunset,
         temperature,
+        visibility,
         weather,
         windDeg,
         windGust,

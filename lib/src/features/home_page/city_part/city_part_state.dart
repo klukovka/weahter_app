@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:weather_app/domain/models/city.dart';
+import 'package:weather_app/src/domain/models/city.dart';
 
 abstract class CityPartState extends Equatable {}
 

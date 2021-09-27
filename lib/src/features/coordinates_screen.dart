@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:weather_app/domain/models/coordinates.dart';
+import 'package:weather_app/src/domain/models/coordinates.dart';
 
 class CoordinatesScreen extends StatefulWidget {
   const CoordinatesScreen({Key? key}) : super(key: key);

@@ -5,12 +5,6 @@ abstract class BaseBlocWidget<B extends Bloc<E, S>, S, E>
     extends StatelessWidget {
   const BaseBlocWidget({Key? key}) : super(key: key);
 
-  B createBloc(BuildContext context);
-
-  Widget createChild(BuildContext context);
-
-  void onBlocCreate(B bloc) {}
-
   void sendEvent(BuildContext context, E event) {
     BlocProvider.of<B>(context).add(event);
   }
@@ -37,16 +31,4 @@ abstract class BaseBlocWidget<B extends Bloc<E, S>, S, E>
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider<B>(
-      lazy: true,
-      create: (context) {
-        var bloc = createBloc(context);
-        onBlocCreate(bloc);
-        return bloc;
-      },
-      child: Builder(builder: (c) => createChild(c)),
-    );
-  }
 }

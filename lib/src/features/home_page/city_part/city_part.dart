@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
-import 'package:weather_app/src/features/base/base_bloc_widget.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
-import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_state.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
 
-class CityPart
-    extends BaseBlocWidget<CityPartBloc, CityPartState, CityPartEvent> {
+class CityPart extends StatelessWidget {
+  const CityPart({Key? key}) : super(key: key);
+
+ Widget observe({
+    required BlocWidgetBuilder<CityPartState> builder,
+    bool Function(CityPartState, CityPartState)? buildWhen,
+  }) {
+    return BlocBuilder<CityPartBloc, CityPartState>(
+      builder: builder,
+      buildWhen: buildWhen
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

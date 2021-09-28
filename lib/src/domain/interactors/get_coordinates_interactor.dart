@@ -3,7 +3,7 @@ import 'package:weather_app/src/domain/repositories/coordinates_repository.dart'
 
 class GetCoordinatesInteractor {
   GetCoordinatesInteractor(this._repository);
-  final CoordinateRepository _repository;
+  final CoordinatesRepository _repository;
 
   Future<Coordinates> call() async {
     final coordinates =

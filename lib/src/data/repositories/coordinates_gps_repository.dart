@@ -3,7 +3,7 @@ import 'package:weather_app/src/data/data_source/local_storage.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/domain/repositories/coordinates_repository.dart';
 
-class CoordinatesGPSRepository implements CoordinateRepository {
+class CoordinatesGPSRepository implements CoordinatesRepository {
   @override
   Future<Coordinates?> getCoordinates() async {
     Location location = new Location();
@@ -37,7 +37,7 @@ class CoordinatesGPSRepository implements CoordinateRepository {
         print('''
     
     
-    ${await LocalStorage().fetchCity()}
+    ${await LocalStorage().fetchCoordinates()}
     
     ''');
       return Coordinates(currentLocation.latitude!, currentLocation.longitude!);

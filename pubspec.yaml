@@ -39,3 +39,5 @@ flutter:
   assets:
     - .env
     - assets/translations/
+    - assets/images/
+    - assets/images/weather.png

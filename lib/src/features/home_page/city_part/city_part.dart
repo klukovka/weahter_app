@@ -9,6 +9,8 @@ import 'package:weather_app/src/features/home_page/weather_part/weather_part_blo
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_event.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
+import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CityPart
     extends BaseBlocWidget<CityPartBloc, CityPartState, CityPartEvent> {
@@ -29,13 +31,14 @@ class CityPart
           }
           if (state is CityPartLoadedState) {
             return ListTile(
-              title: Text('City: ${state.city.name}'),
+              title: Text('${LocaleKeys.city.tr()}: ${state.city.name}'),
               subtitle: Text(
-                'Coordinates: ${_parseCoodrinatesToString(state.coordinates)}',
+                '${LocaleKeys.coordinates.tr()}: ${_parseCoodrinatesToString(state.coordinates)}',
               ),
               trailing: Text(state.city.country),
             );
           }
+
           return SizedBox();
         }),
       ),
@@ -50,8 +53,10 @@ class CityPart
   }
 
   String _parseCoodrinatesToString(Coordinates coordinates) {
-    final latitude = coordinates.latitude > 0 ? 'N' : 'S';
-    final longitude = coordinates.longitude > 0 ? 'E' : 'W';
+    final latitude =
+        coordinates.latitude > 0 ? LocaleKeys.n.tr() : LocaleKeys.s.tr();
+    final longitude =
+        coordinates.longitude > 0 ? LocaleKeys.e.tr() : LocaleKeys.w.tr();
     return '${_absNum(coordinates.latitude)} $latitude; ${_absNum(coordinates.longitude)} $longitude';
   }
 

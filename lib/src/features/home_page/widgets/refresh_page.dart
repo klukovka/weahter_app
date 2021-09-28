@@ -1,7 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
@@ -25,7 +26,7 @@ class RefreshPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Weather App'),
+          title: Text(LocaleKeys.weatherApp.tr()),
           actions: [
             ModePopUpMenu(),
           ],

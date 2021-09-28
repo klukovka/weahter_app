@@ -8,7 +8,6 @@ import 'package:weather_app/src/data/repositories/hourly_open_weather_repository
 import 'package:weather_app/src/domain/interactors/get_city_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_daily_weather_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_hourly_weather_interactor.dart';
-import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';

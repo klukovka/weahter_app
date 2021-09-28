@@ -1,4 +1,5 @@
 import 'package:location/location.dart';
+import 'package:weather_app/src/data/data_source/local_storage.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/domain/repositories/coordinates_repository.dart';
 
@@ -28,6 +29,17 @@ class CoordinatesGPSRepository implements CoordinateRepository {
     final currentLocation = await location.getLocation();
 
     try {
+      final coordinates = {
+        'latitude': currentLocation.latitude!,
+        'longitude': currentLocation.longitude!,
+      };
+      LocalStorage().saveEntity('lastfetchCoordinates', coordinates);
+        print('''
+    
+    
+    ${await LocalStorage().fetchCity()}
+    
+    ''');
       return Coordinates(currentLocation.latitude!, currentLocation.longitude!);
     } catch (error) {
       throw error;

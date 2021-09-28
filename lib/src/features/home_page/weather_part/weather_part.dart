@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_state.dart';
+import 'package:weather_app/src/features/home_page/weather_part/widgets/daily_weather_list_widget.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
 
@@ -29,12 +30,11 @@ class WeatherPart extends StatelessWidget {
         }
 
         if (state.weatherMode == WeatherMode.daily) {
-          return Text('${state.dailyWeather!.length}');
+          return DailyWeatherListWidget(state.dailyWeather!);
         }
 
-        if (state.weatherMode == WeatherMode.hourly){
+        if (state.weatherMode == WeatherMode.hourly) {
           return Text('${state.hourlyWeather!.length}');
-
         }
 
         return SizedBox();

@@ -27,24 +27,24 @@ class DailyWeather extends Equatable {
   });
 
   
-  final DateTime dt;
-  final DateTime sunrise;
-  final DateTime sunset;
-  final DateTime moonrise;
-  final DateTime moonset;
-  final num moonPhase;
-  final Temperature temperature;
-  final FeelsLike feelsLike;
-  final int pressure;
-  final int humidity;
-  final num dewPoint;
-  final num windSpeed;
-  final num windDeg;
-  final num? windGust;
-  final int clouds;
-  final num precipitationProbability;
-  final num? rain;
-  final num? snow;
+  final DateTime dt; 
+  final DateTime sunrise; 
+  final DateTime sunset; 
+  final DateTime moonrise; 
+  final DateTime moonset; 
+  final num moonPhase; 
+  final Temperature temperature; 
+  final FeelsLike feelsLike; 
+  final int pressure; 
+  final int humidity; 
+  final num dewPoint; 
+  final num windSpeed; 
+  final num windDeg; 
+  final num? windGust; 
+  final int clouds; 
+  final num precipitationProbability; 
+  final num? rain; 
+  final num? snow; 
   final List<Weather> weather;
 
   @override

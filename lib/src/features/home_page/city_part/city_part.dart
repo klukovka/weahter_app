@@ -33,7 +33,7 @@ class CityPart
             return ListTile(
               title: Text('${LocaleKeys.city.tr()}: ${state.city.name}'),
               subtitle: Text(
-                '${LocaleKeys.coordinates.tr()}: ${_parseCoodrinatesToString(state.coordinates)}',
+                '${LocaleKeys.coordinates.tr()}:\n${_parseCoodrinatesToString(state.coordinates)}',
               ),
               trailing: Text(state.city.country),
             );

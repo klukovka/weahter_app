@@ -110,4 +110,8 @@ class JsonParser {
       return null;
     }
   }
+
+  static Coordinates parseJsonToCoordinates(Map<String, dynamic> json) {
+    return new Coordinates(json['latitude'], json['longitude']);
+  }
 }

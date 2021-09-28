@@ -37,7 +37,7 @@ class RefreshPage extends StatelessWidget {
             Flexible(
               child: CityPart(),
               flex: 1,
-            ),
+            ),            
             Flexible(
               child: WeatherPart(),
               flex: 4,

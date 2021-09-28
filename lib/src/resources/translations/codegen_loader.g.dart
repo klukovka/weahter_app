@@ -101,10 +101,10 @@ static const Map<String,dynamic> ru = {
   "metre": "м.",
   "city": "Город",
   "coordinates": "Координаты",
-  "n": "с. ш.",
-  "s": "ю. ш.",
-  "e": "в. д.",
-  "w": "з. д."
+  "n": "с.ш.",
+  "s": "ю.ш.",
+  "e": "в.д.",
+  "w": "з.д."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }

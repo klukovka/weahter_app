@@ -11,6 +11,8 @@ class HourlyOpenWeatherRepository implements HourlyWeatherRepository {
   Future<List<HourlyWeather>> getHourlyWeather(Coordinates coordinates) async {
     final hourlyWeather =
         (await openWeatherApi.fetchWeather('daily', coordinates))['hourly'];
+    print(hourlyWeather);
+    print(hourlyWeather.runtimeType);
     final hourlyWeatherMapped = hourlyWeather.map<HourlyWeather>(
       (hourly) => JsonParser.parseJsonToHourlyWeather(hourly),
     );

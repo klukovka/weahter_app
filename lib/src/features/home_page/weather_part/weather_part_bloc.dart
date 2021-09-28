@@ -58,7 +58,7 @@ class WeatherPartBloc extends Bloc<WeatherPartEvent, WeatherPartState> {
               hourlyWeather: hourly, weatherMode: event.weatherMode);
         }
       }
-    } on Exception catch (error) {
+    } catch (error) {
       yield state.copyWith(error: error.toString());
     }
   }

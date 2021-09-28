@@ -1,47 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/features/base/base_bloc_widget.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
+import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_state.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_part_event.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
 
-class CityPart extends StatelessWidget {
+class CityPart
+    extends BaseBlocWidget<CityPartBloc, CityPartState, CityPartEvent> {
   const CityPart({Key? key}) : super(key: key);
-
- Widget observe({
-    required BlocWidgetBuilder<CityPartState> builder,
-    bool Function(CityPartState, CityPartState)? buildWhen,
-  }) {
-    return BlocBuilder<CityPartBloc, CityPartState>(
-      builder: builder,
-      buildWhen: buildWhen
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.all(15),
-      child: observe(builder: (context, state) {
-        if (state is CityPartLoadingState) {
-          return WeatherAppLoader();
-        }
-        if (state is CityPartErrorState) {
-          return WeatherAppError(state.error);
-        }
+    return addListener(
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(15),
+        child: observe(builder: (context, state) {
+          if (state is CityPartLoadingState) {
+            return WeatherAppLoader();
+          }
+          if (state is CityPartErrorState) {
+            return WeatherAppError(state.error);
+          }
+          if (state is CityPartLoadedState) {
+            return ListTile(
+              title: Text('City: ${state.city.name}'),
+              subtitle: Text(
+                'Coordinates: ${_parseCoodrinatesToString(state.coordinates)}',
+              ),
+              trailing: Text(state.city.country),
+            );
+          }
+          return SizedBox();
+        }),
+      ),
+      listener: (context, state) {
         if (state is CityPartLoadedState) {
-          return ListTile(
-            title: Text('City: ${state.city.name}'),
-            subtitle: Text(
-              'Coordinates: ${_parseCoodrinatesToString(state.city.coordinates)}',
-            ),
-            trailing: Text(state.city.country),
+          BlocProvider.of<WeatherPartBloc>(context).add(
+            WeatherPartCoordinateEvent(state.coordinates),
           );
         }
-        return SizedBox();
-      }),
+      },
     );
   }
 

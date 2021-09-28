@@ -58,8 +58,8 @@ class JsonParser {
       weather: _parseJsonToListWeather(json['weather']),
       windDeg: json['wind_deg'],
       windSpeed: json['wind_speed'],
-      rain: json['rain'],
-      snow: json['snow'],
+      rain: _rainSnowWeather(json['rain']),
+      snow: _rainSnowWeather(json['snow']),
       windGust: json['wind_gust'],
     );
   }
@@ -89,8 +89,7 @@ class JsonParser {
     );
   }
 
-  static List<Weather> _parseJsonToListWeather(
-      List<dynamic> json) {
+  static List<Weather> _parseJsonToListWeather(List<dynamic> json) {
     final mappedWeather =
         json.map<Weather>((weather) => _parseJsonToWeather(weather));
     return mappedWeather.toList();
@@ -102,5 +101,13 @@ class JsonParser {
         icon: json['icon'],
         id: json['id'],
         main: json['main']);
+  }
+
+  static num? _rainSnowWeather(Map<String, dynamic>? weather) {
+    try {
+      return weather!['1h'];
+    } catch (error) {
+      return null;
+    }
   }
 }

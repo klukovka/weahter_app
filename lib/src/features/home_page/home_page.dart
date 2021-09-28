@@ -51,8 +51,6 @@ class _HomePageState extends State<HomePage> {
             GetDailyWeatherInteractor(DailyOpenWeatherRepository()),
             GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
           );
-          print('  BlocProvider<WeatherPartBloc>');
-          bloc.add(WeatherPartCoordinateEvent(coordinates));
           return bloc;
         }),
       ],
@@ -61,7 +59,7 @@ class _HomePageState extends State<HomePage> {
           title: Text('Weather App'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Flexible(
               child: CityPart(),

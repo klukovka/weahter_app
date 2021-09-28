@@ -14,7 +14,7 @@ class CityPartBloc extends Bloc<CityPartEvent, CityPartState> {
     try {
       yield CityPartLoadingState();
       final city = await _cityInteractor(event.coordinates);
-      yield CityPartLoadedState(city);
+      yield CityPartLoadedState(city, event.coordinates);
     } catch (error) {
       print(error.toString());
       yield CityPartErrorState(error.toString());

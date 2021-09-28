@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/src/data/repositories/city_open_weather_repository.dart';
+import 'package:weather_app/src/data/repositories/coordinates_gps_repository.dart';
 import 'package:weather_app/src/data/repositories/daily_open_weather_repository.dart';
 import 'package:weather_app/src/data/repositories/hourly_open_weather_repository.dart';
 import 'package:weather_app/src/domain/interactors/get_city_interactor.dart';
+import 'package:weather_app/src/domain/interactors/get_coordinates_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_daily_weather_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_hourly_weather_interactor.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
@@ -27,7 +28,8 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider<CityPartBloc>(create: (context) {
           final bloc = CityPartBloc(
-            new GetCityInteractor(CityOpenWeatherRepository()),
+            GetCityInteractor(CityOpenWeatherRepository()),
+            GetCoordinatesInteractor(CoordinatesGPSRepository()),
           );
           bloc.add(CityPartEvent());
           return bloc;

@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/src/domain/interactors/get_daily_weather_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_hourly_weather_interactor.dart';
-import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_event.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_state.dart';
 

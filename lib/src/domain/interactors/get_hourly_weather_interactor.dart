@@ -10,6 +10,7 @@ class GetHourlyWeatherInteractor
 
   @override
   Future<List<HourlyWeather>> call(Coordinates coordinates) {
+    print('GetHourlyWeatherInteractor');
     return _repository.getHourlyWeather(coordinates);
   }
 }

@@ -16,44 +16,50 @@ class WeatherPartBloc extends Bloc<WeatherPartEvent, WeatherPartState> {
 
   @override
   Stream<WeatherPartState> mapEventToState(WeatherPartEvent event) async* {
-    try {
-      yield state.copyWith(loading: true);
+    print('WeatherPartBloc');
 
-      if (event is WeatherPartCoordinateEvent) {
-        yield* _mapCoordinateEventToState(event);
-      } else if (event is WeatherPartModeEvent) {
-        yield* _mapModeEventToState(event);
-      }
-    } catch (error) {
-      yield state.copyWith(error: error.toString());
+    yield state.copyWith(loading: true);
+
+    if (event is WeatherPartCoordinateEvent) {
+      yield* _mapCoordinateEventToState(event);
+    } else if (event is WeatherPartModeEvent) {
+      yield* _mapModeEventToState(event);
     }
   }
 
   Stream<WeatherPartState> _mapCoordinateEventToState(
       WeatherPartCoordinateEvent event) async* {
-    if (state.weatherMode == WeatherMode.daily) {
-      final daily = await _dailyWeatherInteractor(event.coordinates);
-      yield state.copyWith(dailyWeather: daily);
-    } else if (state.weatherMode == WeatherMode.hourly) {
-      final hourly = await _hourlyWeatherInteractor(event.coordinates);
-      yield state.copyWith(hourlyWeather: hourly);
+    try {
+      if (state.weatherMode == WeatherMode.daily) {
+        final daily = await _dailyWeatherInteractor(event.coordinates);
+        yield state.copyWith(dailyWeather: daily);
+      } else if (state.weatherMode == WeatherMode.hourly) {
+        final hourly = await _hourlyWeatherInteractor(event.coordinates);
+        yield state.copyWith(hourlyWeather: hourly);
+      }
+    }on Exception catch (error) {
+      yield state.copyWith(error: error.toString());
     }
   }
 
   Stream<WeatherPartState> _mapModeEventToState(
       WeatherPartModeEvent event) async* {
-    if (event.coordinates == state.coordinates) {
-      yield state.copyWith(weatherMode: event.weatherMode);
-    } else {
-      if (event.weatherMode == WeatherMode.daily) {
-        final daily = await _dailyWeatherInteractor(event.coordinates);
-        yield state.copyWith(
-            dailyWeather: daily, weatherMode: event.weatherMode);
-      } else if (event.weatherMode == WeatherMode.hourly) {
-        final hourly = await _hourlyWeatherInteractor(event.coordinates);
-        yield state.copyWith(
-            hourlyWeather: hourly, weatherMode: event.weatherMode);
+    try {
+      if (event.coordinates == state.coordinates) {
+        yield state.copyWith(weatherMode: event.weatherMode);
+      } else {
+        if (event.weatherMode == WeatherMode.daily) {
+          final daily = await _dailyWeatherInteractor(event.coordinates);
+          yield state.copyWith(
+              dailyWeather: daily, weatherMode: event.weatherMode);
+        } else if (event.weatherMode == WeatherMode.hourly) {
+          final hourly = await _hourlyWeatherInteractor(event.coordinates);
+          yield state.copyWith(
+              hourlyWeather: hourly, weatherMode: event.weatherMode);
+        }
       }
+    } on Exception catch (error) {
+      yield state.copyWith(error: error.toString());
     }
   }
 }

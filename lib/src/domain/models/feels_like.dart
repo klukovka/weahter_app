@@ -8,10 +8,10 @@ class FeelsLike extends Equatable{
     required this.night,
   });
 
-    final double morning;
-  final double day;
-  final double evening;
-  final double night;
+    final num morning;
+  final num day;
+  final num evening;
+  final num night;
 
    @override
   List<Object?> get props => [

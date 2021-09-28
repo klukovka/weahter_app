@@ -3,7 +3,7 @@ import 'package:weather_app/src/domain/models/weather.dart';
 
 class HourlyWeather extends Equatable {
   HourlyWeather({
-    required this.clounds,
+    required this.clouds,
     required this.dewPoint,
     required this.dt,
     required this.feelsLike,
@@ -21,24 +21,24 @@ class HourlyWeather extends Equatable {
   });
   
   final DateTime dt;
-  final double temperature;
-  final double feelsLike;
+  final num temperature;
+  final num feelsLike;
   final int pressure;
   final int humidity;
-  final double dewPoint;
-  final int clounds;
+  final num dewPoint;
+  final int clouds;
   final int visibility;
-  final double windSpeed;
-  final double? windGust;
-  final double windDeg;
-  final double precipitationProbability;
-  final double? rain;
-  final double? snow;
-  final Weather weather;
+  final num windSpeed;
+  final num? windGust;
+  final num windDeg;
+  final num precipitationProbability;
+  final num? rain;
+  final num? snow;
+  final List<Weather> weather;
 
   @override
   List<Object?> get props => [
-        clounds,
+        clouds,
         dewPoint,
         dt,
         feelsLike,

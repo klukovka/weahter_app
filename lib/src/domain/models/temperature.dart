@@ -9,12 +9,12 @@ class Temperature extends Equatable {
     required this.morning,
     required this.night,
   });
-  final double morning;
-  final double day;
-  final double evening;
-  final double night;
-  final double max;
-  final double min;
+  final num morning;
+  final num day;
+  final num evening;
+  final num night;
+  final num max;
+  final num min;
 
   @override
   List<Object?> get props => [

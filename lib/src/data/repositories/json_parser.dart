@@ -35,7 +35,7 @@ class JsonParser {
       sunrise: _toDateTime(json['sunrise']),
       sunset: _toDateTime(json['sunset']),
       temperature: _parseJsonToTemperature(json['temp']),
-      weather: _parseJsonToWeather(json['weather']),
+      weather: _parseJsonToListWeather(json['weather']),
       windDeg: json['wind_deg'],
       windSpeed: json['wind_speed'],
       rain: json['rain'],
@@ -46,7 +46,7 @@ class JsonParser {
 
   static HourlyWeather parseJsonToHourlyWeather(Map<String, dynamic> json) {
     return HourlyWeather(
-      clounds: json['clounds'],
+      clouds: json['clouds'],
       dewPoint: json['dew_point'],
       dt: _toDateTime(json['dt']),
       feelsLike: json['feels_like'],
@@ -55,7 +55,7 @@ class JsonParser {
       pressure: json['pressure'],
       temperature: json['temp'],
       visibility: json['visibility'],
-      weather: _parseJsonToWeather(json['weather']),
+      weather: _parseJsonToListWeather(json['weather']),
       windDeg: json['wind_deg'],
       windSpeed: json['wind_speed'],
       rain: json['rain'],
@@ -78,6 +78,7 @@ class JsonParser {
   }
 
   static Temperature _parseJsonToTemperature(Map<String, dynamic> json) {
+    print('Temperature');
     return Temperature(
       day: json['day'],
       evening: json['eve'],
@@ -86,6 +87,13 @@ class JsonParser {
       morning: json['morn'],
       night: json['night'],
     );
+  }
+
+  static List<Weather> _parseJsonToListWeather(
+      List<dynamic> json) {
+    final mappedWeather =
+        json.map<Weather>((weather) => _parseJsonToWeather(weather));
+    return mappedWeather.toList();
   }
 
   static Weather _parseJsonToWeather(Map<String, dynamic> json) {

@@ -8,7 +8,7 @@ class WeatherPartState extends Equatable {
   WeatherPartState({
     this.coordinates,
     this.loading = true,
-    this.weatherMode = WeatherMode.daily,
+    this.weatherMode = WeatherMode.hourly,
     this.dailyWeather,
     this.error,
     this.hourlyWeather,

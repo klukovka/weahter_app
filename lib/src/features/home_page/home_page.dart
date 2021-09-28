@@ -3,11 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/src/data/repositories/city_open_weather_repository.dart';
+import 'package:weather_app/src/data/repositories/daily_open_weather_repository.dart';
+import 'package:weather_app/src/data/repositories/hourly_open_weather_repository.dart';
 import 'package:weather_app/src/domain/interactors/get_city_interactor.dart';
+import 'package:weather_app/src/domain/interactors/get_daily_weather_interactor.dart';
+import 'package:weather_app/src/domain/interactors/get_hourly_weather_interactor.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_part.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';
+import 'package:weather_app/src/features/home_page/weather_part/weather_part_event.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,9 +41,18 @@ class _HomePageState extends State<HomePage> {
       providers: [
         BlocProvider<CityPartBloc>(create: (context) {
           final bloc = CityPartBloc(
-            new GetCityInteractor(new CityOpenWeatherRepository()),
+            new GetCityInteractor(CityOpenWeatherRepository()),
           );
-          _getLoc().then((value) => bloc.add(new CityPartEvent(coordinates)));
+          _getLoc().then((value) => bloc.add(CityPartEvent(coordinates)));
+          return bloc;
+        }),
+        BlocProvider<WeatherPartBloc>(create: (context) {
+          final bloc = WeatherPartBloc(
+            GetDailyWeatherInteractor(DailyOpenWeatherRepository()),
+            GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
+          );
+          print('  BlocProvider<WeatherPartBloc>');
+          bloc.add(WeatherPartCoordinateEvent(coordinates));
           return bloc;
         }),
       ],
@@ -52,9 +68,7 @@ class _HomePageState extends State<HomePage> {
               flex: 1,
             ),
             Flexible(
-              child: Container(
-                color: Colors.amber,
-              ),
+              child: WeatherPart(),
               flex: 4,
             )
           ],

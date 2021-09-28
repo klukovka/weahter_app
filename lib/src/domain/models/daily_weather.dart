@@ -32,20 +32,20 @@ class DailyWeather extends Equatable {
   final DateTime sunset;
   final DateTime moonrise;
   final DateTime moonset;
-  final double moonPhase;
+  final num moonPhase;
   final Temperature temperature;
   final FeelsLike feelsLike;
   final int pressure;
   final int humidity;
-  final double dewPoint;
-  final double windSpeed;
-  final double windDeg;
-  final double? windGust;
+  final num dewPoint;
+  final num windSpeed;
+  final num windDeg;
+  final num? windGust;
   final int clouds;
-  final double precipitationProbability;
-  final double? rain;
-  final double? snow;
-  final Weather weather;
+  final num precipitationProbability;
+  final num? rain;
+  final num? snow;
+  final List<Weather> weather;
 
   @override
   List<Object?> get props => [

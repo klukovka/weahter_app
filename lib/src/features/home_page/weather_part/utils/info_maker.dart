@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/src/domain/models/weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/temperature_info.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/weather_widget.dart';
+import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class InfoMaker {
   static Widget rowInfo(
@@ -23,15 +25,15 @@ class InfoMaker {
 
   static Widget nullCheckPrecipitation(
     String name,
-    num? precipitation, [
-    String unit = 'mm.',
+    num? precipitation, {
+    String? unit,
     double horizontalPadding = 0,
-  ]) {
+  }) {
     if (precipitation != null) {
       return rowInfo(
         name,
         precipitation,
-        unit: unit,
+        unit: unit ?? LocaleKeys.mm.tr(),
         horizontalPadding: horizontalPadding,
       );
     }
@@ -43,25 +45,28 @@ class InfoMaker {
       Column(
         children: [
           TemperatureInfo(
-            timeOfDay: 'Temperature',
+            timeOfDay: LocaleKeys.temperature.tr(),
             temperature: temperature,
             feelsLike: feelsLike,
           ),
           rowInfo(
-            'Clouds',
+            LocaleKeys.clouds.tr(),
             clouds,
             horizontalPadding: 0,
             unit: '%',
           ),
-          rowInfo('Precipitation Probability', precipitationProbability,
-              horizontalPadding: 0),
-          nullCheckPrecipitation('Rain', rain),
-          nullCheckPrecipitation('Snow', snow),
+          rowInfo(
+            LocaleKeys.precipitationProbability.tr(),
+            precipitationProbability,
+            horizontalPadding: 0,
+          ),
+          nullCheckPrecipitation(LocaleKeys.rain.tr(), rain),
+          nullCheckPrecipitation(LocaleKeys.snow.tr(), snow),
         ],
       );
 
   static List<Widget> weatherList(List<Weather> weather) {
-    final _weatherList = <Widget>[Text('Weather')];
+    final _weatherList = <Widget>[Text(LocaleKeys.weather.tr())];
     weather.forEach((weather) {
       _weatherList.add(WeatherWidget(weather));
     });

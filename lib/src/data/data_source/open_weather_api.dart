@@ -3,20 +3,21 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/src/domain/models/coordinates.dart';
+import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class OpenWeatherApi {
   OpenWeatherApi();
   final accessKey = dotenv.get('ACCESS_KEY');
+  final lang = LocaleKeys.lang.tr();
   static const _authority = 'api.openweathermap.org';
 
   Future<dynamic> fetchCities(Coordinates coordinates) async {
-    print(Uri.https(
-      _authority,
-      _buildPath('find'), {
-        'units': 'metric',
-        'lang': 'en',
-        'appid': accessKey,
-      }));
+    print(Uri.https(_authority, _buildPath('find'), {
+      'units': 'metric',
+      'lang': lang,
+      'appid': accessKey,
+    }));
     final response = await http.get(Uri.https(
       _authority,
       _buildPath('find'),

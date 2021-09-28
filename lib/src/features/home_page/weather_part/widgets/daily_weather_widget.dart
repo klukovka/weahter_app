@@ -3,6 +3,8 @@ import 'package:weather_app/src/domain/models/daily_weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/date_time_mapper.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/info_maker.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/temperature_widget.dart';
+import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DailyWeatherWidget extends StatelessWidget {
   const DailyWeatherWidget(this.dailyWeather, {Key? key}) : super(key: key);
@@ -28,29 +30,42 @@ class DailyWeatherWidget extends StatelessWidget {
 
   List<Widget> get _allInfo => [
         ...InfoMaker.weatherList(dailyWeather.weather),
-        Text('Sun'),
+        Text(LocaleKeys.sun.tr()),
         InfoMaker.rowInfo(
-            'Sunrise', DateTineMapper.timeMapToString(dailyWeather.sunrise)),
+          LocaleKeys.sunrise.tr(),
+          DateTineMapper.timeMapToString(dailyWeather.sunrise),
+        ),
         InfoMaker.rowInfo(
-            'Sunset', DateTineMapper.timeMapToString(dailyWeather.sunset)),
-        Text('Moon'),
+          LocaleKeys.sunset.tr(),
+          DateTineMapper.timeMapToString(dailyWeather.sunset),
+        ),
+        Text(LocaleKeys.moon.tr()),
         InfoMaker.rowInfo(
-            'Moonrise', DateTineMapper.timeMapToString(dailyWeather.moonrise)),
-        InfoMaker.rowInfo(
-            'Moonset', DateTineMapper.timeMapToString(dailyWeather.moonset)),
-        InfoMaker.rowInfo('Moon Phase', dailyWeather.moonPhase),
+          LocaleKeys.moonrise.tr(),
+          DateTineMapper.timeMapToString(dailyWeather.moonrise),
+        ),
+        InfoMaker.rowInfo(LocaleKeys.moonset.tr(),
+            DateTineMapper.timeMapToString(dailyWeather.moonset)),
+        InfoMaker.rowInfo(LocaleKeys.moonPhase.tr(), dailyWeather.moonPhase),
         TemperatureWidget(dailyWeather.temperature, dailyWeather.feelsLike),
-        Text('Atmosphere'),
-        InfoMaker.rowInfo('Pressure', dailyWeather.pressure, unit: 'hPa'),
-        InfoMaker.rowInfo('Humidity', dailyWeather.humidity, unit: '%'),
-        InfoMaker.rowInfo('Atmospheric temperature', dailyWeather.dewPoint,
+        Text(LocaleKeys.atmosphere.tr()),
+        InfoMaker.rowInfo(
+          LocaleKeys.pressure.tr(),
+          dailyWeather.pressure,
+          unit: LocaleKeys.hPa.tr(),
+        ),
+        InfoMaker.rowInfo(LocaleKeys.humidity.tr(), dailyWeather.humidity,
+            unit: '%'),
+        InfoMaker.rowInfo(
+            LocaleKeys.atmosphericTemperature.tr(), dailyWeather.dewPoint,
             unit: '°C'),
-        Text('Wind'),
-        InfoMaker.rowInfo('Wind speed', dailyWeather.windSpeed,
-            unit: 'metre/sec'),
-        InfoMaker.rowInfo('Wind direction', dailyWeather.windDeg,
-            unit: 'degrees'),
+        Text(LocaleKeys.wind.tr()),
+        InfoMaker.rowInfo(LocaleKeys.speed.tr(), dailyWeather.windSpeed,
+            unit: LocaleKeys.metreSec.tr()),
+        InfoMaker.rowInfo(LocaleKeys.direction.tr(), dailyWeather.windDeg,
+            unit: LocaleKeys.degrees.tr()),
         InfoMaker.nullCheckPrecipitation(
-            'Wind gust', dailyWeather.windGust, 'metre/sec', 15),
+            LocaleKeys.gust.tr(), dailyWeather.windGust,
+            unit: LocaleKeys.metreSec.tr(), horizontalPadding: 15),
       ];
 }

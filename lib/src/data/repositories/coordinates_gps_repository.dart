@@ -1,11 +1,15 @@
 import 'package:location/location.dart';
 import 'package:weather_app/src/data/data_source/local_storage.dart';
+import 'package:weather_app/src/data/repositories/json_parser.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/domain/repositories/coordinates_repository.dart';
 
 class CoordinatesGPSRepository implements CoordinatesRepository {
+  final localStorage = LocalStorage();
+
   @override
   Future<Coordinates?> getCoordinates() async {
+    final coordinatesLocal = await localStorage.fetchCoordinates();
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -14,7 +18,7 @@ class CoordinatesGPSRepository implements CoordinatesRepository {
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
-        return null;
+        return JsonParser.parseJsonToCoordinates(coordinatesLocal);
       }
     }
 
@@ -22,7 +26,7 @@ class CoordinatesGPSRepository implements CoordinatesRepository {
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
-        return null;
+        return JsonParser.parseJsonToCoordinates(coordinatesLocal);
       }
     }
 
@@ -33,8 +37,8 @@ class CoordinatesGPSRepository implements CoordinatesRepository {
         'latitude': currentLocation.latitude!,
         'longitude': currentLocation.longitude!,
       };
-      LocalStorage().saveEntity('lastfetchCoordinates', coordinates);
-        print('''
+      localStorage.saveEntity('lastfetchCoordinates', coordinates);
+      print('''
     
     
     ${await LocalStorage().fetchCoordinates()}

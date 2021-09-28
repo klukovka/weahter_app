@@ -22,8 +22,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Coordinates coordinates = new Coordinates(50.4333, 30.5167);
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -32,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           final bloc = CityPartBloc(
             new GetCityInteractor(CityOpenWeatherRepository()),
           );
-          getLoc().then((value) => bloc.add(CityPartEvent(coordinates)));
+          bloc.add(CityPartEvent());
           return bloc;
         }),
         BlocProvider<WeatherPartBloc>(create: (context) {
@@ -43,42 +41,7 @@ class _HomePageState extends State<HomePage> {
           return bloc;
         }),
       ],
-      child: RefreshPage(
-        getLoc: getLoc,
-      ),
+      child: RefreshPage(),
     );
-  }
-
-  Future<Coordinates> getLoc() async {
-    Location location = new Location();
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return coordinates;
-      }
-    }
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return coordinates;
-      }
-    }
-
-    final currentLocation = await location.getLocation();
-
-    try {
-      coordinates = new Coordinates(
-          currentLocation.latitude!, currentLocation.longitude!);
-      print(coordinates);
-    } on Exception {
-      //TODO
-    }
-    return coordinates;
   }
 }

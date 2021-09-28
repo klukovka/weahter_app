@@ -10,7 +10,6 @@ import 'package:weather_app/src/features/home_page/widgets/mode_popup_menu.dart'
 
 class RefreshPage extends StatelessWidget {
   const RefreshPage({
-    required this.getLoc,
     Key? key,
   }) : super(key: key);
 
@@ -18,14 +17,11 @@ class RefreshPage extends StatelessWidget {
     BlocProvider.of<B>(context).add(event);
   }
 
-  final Future<Coordinates> Function() getLoc;
   @override
   Widget build(BuildContext context) {
     return LiquidPullToRefresh(
       onRefresh: () async {
-        getLoc.call().then((value) {
-          sendEvent<CityPartBloc, CityPartEvent>(context, CityPartEvent(value));
-        });
+        sendEvent<CityPartBloc, CityPartEvent>(context, CityPartEvent());
       },
       child: Scaffold(
         appBar: AppBar(

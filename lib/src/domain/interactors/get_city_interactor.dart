@@ -13,6 +13,10 @@ class GetCityInteractor implements BaseInteractor<Coordinates, City> {
   Future<City> call(Coordinates coordinates) async {
     final cities = await _repository.getCities(coordinates);
 
+    if (cities.length == 1) {
+      return cities[0];
+    }
+
     City minDistanceCity = cities[0];
     double minDistance = _calculateDistance(minDistanceCity, coordinates);
 

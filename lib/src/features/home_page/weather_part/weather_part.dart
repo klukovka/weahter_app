@@ -4,6 +4,7 @@ import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dar
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_state.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/daily_weather_list_widget.dart';
+import 'package:weather_app/src/features/home_page/weather_part/widgets/hourly_weather_list_widget.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
 
@@ -34,7 +35,7 @@ class WeatherPart extends StatelessWidget {
         }
 
         if (state.weatherMode == WeatherMode.hourly) {
-          return Text('${state.hourlyWeather!.length}');
+          return HourlyWeatherListWidget(state.hourlyWeather!);
         }
 
         return SizedBox();

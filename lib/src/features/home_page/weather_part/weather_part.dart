@@ -8,6 +8,7 @@ import 'package:weather_app/src/features/home_page/weather_part/widgets/hourly_w
 import 'package:weather_app/src/features/home_page/widgets/weather_app_error.dart';
 import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.dart';
 
+
 class WeatherPart extends StatelessWidget {
   const WeatherPart({Key? key}) : super(key: key);
 
@@ -29,17 +30,18 @@ class WeatherPart extends StatelessWidget {
         if (state.error != null) {
           return WeatherAppError(state.error!);
         }
-
+      
         if (state.weatherMode == WeatherMode.daily) {
           return DailyWeatherListWidget(state.dailyWeather!);
         }
-
+      
         if (state.weatherMode == WeatherMode.hourly) {
           return HourlyWeatherListWidget(state.hourlyWeather!);
         }
-
+      
         return SizedBox();
       }),
     );
   }
+  
 }

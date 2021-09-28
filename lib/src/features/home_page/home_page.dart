@@ -9,14 +9,10 @@ import 'package:weather_app/src/domain/interactors/get_city_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_daily_weather_interactor.dart';
 import 'package:weather_app/src/domain/interactors/get_hourly_weather_interactor.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
-import 'package:weather_app/src/features/home_page/city_part/city_part.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_bloc.dart';
 import 'package:weather_app/src/features/home_page/city_part/city_part_event.dart';
-import 'package:weather_app/src/features/home_page/weather_part/weather_mode.dart';
-import 'package:weather_app/src/features/home_page/weather_part/weather_part.dart';
 import 'package:weather_app/src/features/home_page/weather_part/weather_part_bloc.dart';
-import 'package:weather_app/src/features/home_page/weather_part/weather_part_event.dart';
-import 'package:weather_app/src/features/home_page/widgets/mode_popup_menu.dart';
+import 'package:weather_app/src/features/home_page/widgets/refresh_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,10 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Coordinates coordinates = new Coordinates(50.4333, 30.5167);
 
-  void sendEvent<B extends Bloc, E>(BuildContext context, E event) {
-    BlocProvider.of<B>(context).add(event);
-  }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -40,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           final bloc = CityPartBloc(
             new GetCityInteractor(CityOpenWeatherRepository()),
           );
-          _getLoc().then((value) => bloc.add(CityPartEvent(coordinates)));
+          getLoc().then((value) => bloc.add(CityPartEvent(coordinates)));
           return bloc;
         }),
         BlocProvider<WeatherPartBloc>(create: (context) {
@@ -51,31 +43,13 @@ class _HomePageState extends State<HomePage> {
           return bloc;
         }),
       ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Weather App'),
-          actions: [
-            ModePopUpMenu(),
-          ],
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Flexible(
-              child: CityPart(),
-              flex: 1,
-            ),
-            Flexible(
-              child: WeatherPart(),
-              flex: 4,
-            )
-          ],
-        ),
+      child: RefreshPage(
+        getLoc: getLoc,
       ),
     );
   }
 
-  Future<void> _getLoc() async {
+  Future<Coordinates> getLoc() async {
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -84,7 +58,7 @@ class _HomePageState extends State<HomePage> {
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
-        return;
+        return coordinates;
       }
     }
 
@@ -92,7 +66,7 @@ class _HomePageState extends State<HomePage> {
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
-        return;
+        return coordinates;
       }
     }
 
@@ -101,8 +75,10 @@ class _HomePageState extends State<HomePage> {
     try {
       coordinates = new Coordinates(
           currentLocation.latitude!, currentLocation.longitude!);
+      print(coordinates);
     } on Exception {
       //TODO
     }
+    return coordinates;
   }
 }

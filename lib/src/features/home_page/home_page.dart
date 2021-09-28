@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/src/data/repositories/city_local_repository.dart';
@@ -26,29 +30,100 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late CityPartBloc cityBloc;
+  late WeatherPartBloc weatherBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    initConnectivity();
+
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    cityBloc = CityPartBloc(
+        //GetCityInteractor(CityOpenWeatherRepository()),
+        //GetCoordinatesInteractor(CoordinatesGPSRepository()),
+        GetCityInteractor(CityLocalRepository()),
+        GetCoordinatesInteractor(CoordinatesLocalRepository()));
+    weatherBloc = WeatherPartBloc(
+        // GetDailyWeatherInteractor(DailyOpenWeatherRepository()),
+        //  GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
+        GetDailyWeatherInteractor(DailyWeatherLocalRepository()),
+        GetHourlyWeatherInteractor(HourlyWeatherLocalRepository()));
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    cityBloc.close();
+    weatherBloc.close();
+    super.dispose();
+  }
+
+  Future<void> initConnectivity() async {
+    late ConnectivityResult result;
+    try {
+      result = await _connectivity.checkConnectivity();
+    } on PlatformException catch (e) {
+      print(e.toString());
+      return;
+    }
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    setState(() {
+      _connectionStatus = result;
+      print(_connectionStatus);
+      cityBloc.close();
+      weatherBloc.close();
+      print(cityBloc.isClosed);
+      print(weatherBloc.isClosed);
+      if (_connectionStatus == ConnectivityResult.none) {
+        cityBloc = CityPartBloc(GetCityInteractor(CityLocalRepository()),
+            GetCoordinatesInteractor(CoordinatesLocalRepository()));
+        weatherBloc = WeatherPartBloc(
+            GetDailyWeatherInteractor(DailyWeatherLocalRepository()),
+            GetHourlyWeatherInteractor(HourlyWeatherLocalRepository()));
+      } else {
+        cityBloc = CityPartBloc(
+          GetCityInteractor(CityOpenWeatherRepository()),
+          GetCoordinatesInteractor(CoordinatesGPSRepository()),
+        );
+        weatherBloc = WeatherPartBloc(
+          GetDailyWeatherInteractor(DailyOpenWeatherRepository()),
+          GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
+        );
+      }
+       print(cityBloc.isClosed);
+      print(weatherBloc.isClosed);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider<CityPartBloc>(create: (context) {
-          final bloc = CityPartBloc(
-         //   GetCityInteractor(CityOpenWeatherRepository()),
-          //  GetCoordinatesInteractor(CoordinatesGPSRepository()),
-        GetCityInteractor(CityLocalRepository()),
-        GetCoordinatesInteractor(CoordinatesLocalRepository())
-          );
-          bloc.add(CityPartEvent());
-          return bloc;
-        }),
-        BlocProvider<WeatherPartBloc>(create: (context) {
-          final bloc = WeatherPartBloc(
-          //  GetDailyWeatherInteractor(DailyOpenWeatherRepository()),
-           // GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
-          GetDailyWeatherInteractor(DailyWeatherLocalRepository()),
-          GetHourlyWeatherInteractor(HourlyWeatherLocalRepository())
-          );
-          return bloc;
-        }),
+        BlocProvider<CityPartBloc>(
+          create: (context) {
+            cityBloc.add(CityPartEvent());
+            return cityBloc;
+          },
+          key: ValueKey(_connectionStatus),
+        ),
+        BlocProvider<WeatherPartBloc>(
+          create: (context) {
+            return weatherBloc;
+          },
+          key: ValueKey(_connectionStatus),
+        ),
       ],
       child: RefreshPage(),
     );

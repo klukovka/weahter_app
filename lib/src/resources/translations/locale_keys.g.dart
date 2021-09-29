@@ -45,5 +45,17 @@ abstract class  LocaleKeys {
   static const s = 's';
   static const e = 'e';
   static const w = 'w';
+  static const download = 'download';
+  static const name = 'name';
+  static const email = 'email';
+  static const logOut = 'logOut';
+  static const settings = 'settings';
+  static const user = 'user';
+  static const wentWrong = 'wentWrong';
+  static const singIn = 'singIn';
+  static const language = 'language';
+  static const russian = 'russian';
+  static const english = 'english';
+  static const currentLanguage = 'currentLanguage';
 
 }

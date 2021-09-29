@@ -4,7 +4,7 @@ import 'package:weather_app/src/domain/models/temperature.dart';
 import 'package:weather_app/src/domain/models/weather.dart';
 
 class DailyWeather extends Equatable {
-  DailyWeather({
+  const DailyWeather({
     required this.clouds,
     required this.dewPoint,
     required this.dt,

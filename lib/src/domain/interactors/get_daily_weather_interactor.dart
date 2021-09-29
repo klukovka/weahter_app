@@ -10,7 +10,6 @@ class GetDailyWeatherInteractor
 
   @override
   Future<List<DailyWeather>> call(Coordinates coordinates) {
-    print('GetDailyWeatherInteractor');
     return _repository.getDailyWeather(coordinates);
   }
 }

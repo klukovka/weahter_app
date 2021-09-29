@@ -2,13 +2,13 @@ import 'package:weather_app/src/domain/models/city.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/domain/models/daily_weather.dart';
 import 'package:weather_app/src/domain/models/feels_like.dart';
-import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/models/hourly_weather.dart';
 import 'package:weather_app/src/domain/models/temperature.dart';
 import 'package:weather_app/src/domain/models/weather.dart';
 
 class JsonParser {
   static City parseJsonToCity(Map<String, dynamic> json) {
-    return new City(
+    return City(
       country: json['sys']['country'],
       id: json['id'].toString(),
       name: json['name'],
@@ -17,11 +17,11 @@ class JsonParser {
   }
 
   static Coordinates _parseJsonToCoordinates(Map<String, dynamic> json) {
-    return new Coordinates(json['lat'], json['lon']);
+    return Coordinates(json['lat'], json['lon']);
   }
 
   static DailyWeather parseJsonToDailyWeather(Map<String, dynamic> json) {
-    return new DailyWeather(
+    return DailyWeather(
       clouds: json['clouds'],
       dewPoint: json['dew_point'],
       dt: _toDateTime(json['dt']),
@@ -64,7 +64,7 @@ class JsonParser {
     );
   }
 
-  static DateTime _toDateTime(dynamic timestamp) {
+  static DateTime _toDateTime(timestamp) {
     return DateTime.fromMillisecondsSinceEpoch(timestamp * 1000);
   }
 
@@ -78,7 +78,6 @@ class JsonParser {
   }
 
   static Temperature _parseJsonToTemperature(Map<String, dynamic> json) {
-    print('Temperature');
     return Temperature(
       day: json['day'],
       evening: json['eve'],
@@ -109,5 +108,9 @@ class JsonParser {
     } catch (error) {
       return null;
     }
+  }
+
+  static Coordinates parseJsonToCoordinates(Map<String, dynamic> json) {
+    return Coordinates(json['latitude'], json['longitude']);
   }
 }

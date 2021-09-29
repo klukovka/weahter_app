@@ -13,11 +13,6 @@ class OpenWeatherApi {
   static const _authority = 'api.openweathermap.org';
 
   Future<dynamic> fetchCities(Coordinates coordinates) async {
-    print(Uri.https(_authority, _buildPath('find'), {
-      'units': 'metric',
-      'lang': lang,
-      'appid': accessKey,
-    }));
     final response = await http.get(Uri.https(
       _authority,
       _buildPath('find'),

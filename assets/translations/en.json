@@ -42,5 +42,17 @@
   "n": "N",
   "s": "S",
   "e": "E",
-  "w": "W"
+  "w": "W",
+  "download": "You have not download forecast yet",
+  "name": "Name",
+  "email": "Email",
+  "logOut": "Log out",
+  "settings": "Settings",
+  "user": "User",
+  "wentWrong": "Something went wrong",
+  "singIn": "Sing in with Google",
+  "language": "Language",
+  "russian": "Russian",
+  "english": "English",
+  "currentLanguage": "English"
 }

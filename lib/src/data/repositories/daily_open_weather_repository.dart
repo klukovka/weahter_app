@@ -1,4 +1,4 @@
-
+import 'package:weather_app/src/data/data_source/local_storage.dart';
 import 'package:weather_app/src/data/data_source/open_weather_api.dart';
 import 'package:weather_app/src/data/repositories/json_parser.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
@@ -12,6 +12,8 @@ class DailyOpenWeatherRepository implements DailyWeatherRepository {
   Future<List<DailyWeather>> getDailyWeather(Coordinates coordinates) async {
     final dailyWeather =
         (await openWeatherApi.fetchWeather('hourly', coordinates))['daily'];
+    await LocalStorage().saveEntity('lastfetchDailyWeather', dailyWeather);
+ 
     final dailyWeatherMapped = dailyWeather.map<DailyWeather>(
       (daily) => JsonParser.parseJsonToDailyWeather(daily),
     );

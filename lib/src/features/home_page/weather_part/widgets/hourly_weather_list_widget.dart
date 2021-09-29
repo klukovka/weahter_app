@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/models/hourly_weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/hourly_weather_widget.dart';
 
 class HourlyWeatherListWidget extends StatelessWidget {

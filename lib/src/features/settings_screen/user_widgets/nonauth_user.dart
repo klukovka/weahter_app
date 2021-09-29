@@ -8,6 +8,10 @@ class NonauthUser extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        child: Text(LocaleKeys.singIn.tr()), onPressed: onPressed);
+      onPressed: onPressed,
+      child: Text(
+        LocaleKeys.singIn.tr(),
+      ),
+    );
   }
 }

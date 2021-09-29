@@ -12,7 +12,7 @@ class LanguageChooser extends StatelessWidget {
         Text('${LocaleKeys.language.tr()}: ${LocaleKeys.currentLanguage.tr()}'),
         ElevatedButton(
             onPressed: () async {
-              await context.setLocale(Locale('en'));
+              await context.setLocale(const Locale('en'));
             },
             child: Text(LocaleKeys.english.tr())),
         ElevatedButton(

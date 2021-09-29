@@ -20,32 +20,30 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(LocaleKeys.settings.tr()),
       ),
-      body: Container(
-        child: ListView(
-          children: [
-            Text(LocaleKeys.user.tr(), textAlign: TextAlign.center,),
-            StreamBuilder<User?>(
-                stream: FirebaseAuth.instance.authStateChanges(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return WeatherAppLoader();
-                  } else if (snapshot.hasError) {
-                    return WeatherAppError(LocaleKeys.wentWrong.tr());
-                  } else if (snapshot.hasData) {
-                    final user = FirebaseAuth.instance.currentUser;
-                    return AuthUser(user!, () {
-                      provider.googleLogout();
-                    });
-                  } else {
-                    return NonauthUser(() {
-                      provider.googleLogin();
-                    });
-                  }
-                }),
-            Divider(),
-            LanguageChooser(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Text(LocaleKeys.user.tr(), textAlign: TextAlign.center,),
+          StreamBuilder<User?>(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const WeatherAppLoader();
+                } else if (snapshot.hasError) {
+                  return WeatherAppError(LocaleKeys.wentWrong.tr());
+                } else if (snapshot.hasData) {
+                  final user = FirebaseAuth.instance.currentUser;
+                  return AuthUser(user!, () {
+                    provider.googleLogout();
+                  });
+                } else {
+                  return NonauthUser(() {
+                    provider.googleLogin();
+                  });
+                }
+              }),
+          const Divider(),
+          const LanguageChooser(),
+        ],
       ),
     );
   }

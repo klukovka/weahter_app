@@ -20,8 +20,8 @@ class AuthUser extends StatelessWidget {
         backgroundImage: NetworkImage(photo.replaceFirst('s96', 's400')),
       ),
       trailing: ElevatedButton(
-        child: Text(LocaleKeys.logOut.tr()),
         onPressed: onPressed,
+        child: Text(LocaleKeys.logOut.tr()),
       ),
     );
   }

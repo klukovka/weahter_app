@@ -21,37 +21,40 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(LocaleKeys.settings.tr()),
       ),
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              LocaleKeys.user.tr(),
-              textAlign: TextAlign.center,
-              style: textTheme.headline3,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                LocaleKeys.user.tr(),
+                textAlign: TextAlign.center,
+                style: textTheme.headline3,
+              ),
             ),
-          ),
-          StreamBuilder<User?>(
-              stream: FirebaseAuth.instance.authStateChanges(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const WeatherAppLoader();
-                } else if (snapshot.hasError) {
-                  return WeatherAppError(LocaleKeys.wentWrong.tr());
-                } else if (snapshot.hasData) {
-                  final user = FirebaseAuth.instance.currentUser;
-                  return AuthUser(user!, () {
-                    provider.googleLogout();
-                  });
-                } else {
-                  return NonauthUser(() {
-                    provider.googleLogin();
-                  });
-                }
-              }),
-          const Divider(),
-          const LanguageChooser(),
-        ],
+            StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.authStateChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const WeatherAppLoader();
+                  } else if (snapshot.hasError) {
+                    return WeatherAppError(LocaleKeys.wentWrong.tr());
+                  } else if (snapshot.hasData) {
+                    final user = FirebaseAuth.instance.currentUser;
+                    return AuthUser(user!, () {
+                      provider.googleLogout();
+                    });
+                  } else {
+                    return NonauthUser(() {
+                      provider.googleLogin();
+                    });
+                  }
+                }),
+            const Divider(),
+            const LanguageChooser(),
+          ],
+        ),
       ),
     );
   }

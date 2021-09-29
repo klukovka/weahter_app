@@ -5,9 +5,13 @@ class WeatherAppError extends StatelessWidget {
   final String error;
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Container(
       alignment: Alignment.center,
-      child: Text(error),
+      child: Text(
+        error,
+        style: textTheme.bodyText1,
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/src/domain/models/hourly_weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/date_time_mapper.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/info_maker.dart';
+import 'package:weather_app/src/resources/theme/app_text_theme.dart';
 import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -17,6 +18,7 @@ class HourlyWeatherWidget extends StatelessWidget {
     return ExpansionTile(
       title: Text(
         DateTineMapper.dateTimeToString(hourlyWeather.dt),
+        style: Theme.of(context).textTheme.headline3,
       ),
       subtitle: InfoMaker.shortInfo(
         hourlyWeather.temperature,
@@ -32,7 +34,7 @@ class HourlyWeatherWidget extends StatelessWidget {
 
   List<Widget> get _allInfo => [
         ...InfoMaker.weatherList(hourlyWeather.weather),
-        Text(LocaleKeys.atmosphere.tr()),
+        Text(LocaleKeys.atmosphere.tr(),style: AppTextTheme.headline3),
         InfoMaker.rowInfo(
           LocaleKeys.pressure.tr(),
           hourlyWeather.pressure,
@@ -50,7 +52,7 @@ class HourlyWeatherWidget extends StatelessWidget {
           hourlyWeather.visibility,
           unit: LocaleKeys.metre.tr(),
         ),
-        Text(LocaleKeys.wind.tr()),
+        Text(LocaleKeys.wind.tr(),style: AppTextTheme.headline3),
         InfoMaker.rowInfo(LocaleKeys.speed.tr(), hourlyWeather.windSpeed,
             unit: LocaleKeys.metreSec.tr()),
         InfoMaker.rowInfo(

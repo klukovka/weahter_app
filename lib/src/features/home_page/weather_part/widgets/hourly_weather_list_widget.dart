@@ -11,11 +11,14 @@ class HourlyWeatherListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       itemBuilder: (context, index) {
         return HourlyWeatherWidget(hourlyWeather[index]);
       },
       itemCount: hourlyWeather.length,
+      separatorBuilder: (_, __) {
+        return const Divider();
+      },
     );
   }
 }

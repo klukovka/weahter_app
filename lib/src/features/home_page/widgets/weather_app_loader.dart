@@ -5,11 +5,14 @@ class WeatherAppLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).primaryColor;
     return Container(
       alignment: Alignment.center,
       height: 50,
       width: 50,
-      child: const CircularProgressIndicator(),
+      child: CircularProgressIndicator(
+        color: color,
+      ),
     );
   }
 }

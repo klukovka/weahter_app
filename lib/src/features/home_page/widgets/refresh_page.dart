@@ -21,9 +21,13 @@ class RefreshPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
-        title: Text(LocaleKeys.weatherApp.tr()),
+        title: Text(
+          LocaleKeys.weatherApp.tr(),
+          style: textTheme.headline1,
+        ),
         actions: [
           IconButton(
               onPressed: () {

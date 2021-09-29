@@ -18,6 +18,7 @@ class CityPart
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return addListener(
       child: Container(
         alignment: Alignment.center,
@@ -32,11 +33,15 @@ class CityPart
           if (state is CityPartLoadedState) {
             final coordinates = _parseCoodrinatesToString(state.coordinates);
             return ListTile(
-              title: Text('${LocaleKeys.city.tr()}: ${state.city.name}'),
+              title: Text(
+                '${LocaleKeys.city.tr()}: ${state.city.name}',
+                style: textTheme.headline2,
+              ),
               subtitle: Text(
                 '${LocaleKeys.coordinates.tr()}:\n$coordinates',
+                style: textTheme.headline3,
               ),
-              trailing: Text(state.city.country),
+              trailing: Text(state.city.country, style: textTheme.headline3),
               isThreeLine: true,
             );
           }

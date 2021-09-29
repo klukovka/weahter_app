@@ -10,15 +10,23 @@ class ModePopUpMenu extends StatelessWidget {
   const ModePopUpMenu({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return PopupMenuButton<WeatherMode>(
       itemBuilder: (context) => <PopupMenuEntry<WeatherMode>>[
         PopupMenuItem<WeatherMode>(
           value: WeatherMode.daily,
-          child: Text(LocaleKeys.dailyWeather.tr()),
+          child: Text(
+            LocaleKeys.dailyWeather.tr(),
+            style: textTheme.headline4,
+          ),
         ),
         PopupMenuItem<WeatherMode>(
           value: WeatherMode.hourly,
-          child: Text(LocaleKeys.hourlyWeather.tr()),
+          child: Text(
+            LocaleKeys.hourlyWeather.tr(),
+            style: textTheme.headline4,
+          ),
         ),
       ],
       onSelected: (mode) {

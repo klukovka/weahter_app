@@ -16,13 +16,21 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
         title: Text(LocaleKeys.settings.tr()),
       ),
       body: ListView(
         children: [
-          Text(LocaleKeys.user.tr(), textAlign: TextAlign.center,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              LocaleKeys.user.tr(),
+              textAlign: TextAlign.center,
+              style: textTheme.headline3,
+            ),
+          ),
           StreamBuilder<User?>(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {

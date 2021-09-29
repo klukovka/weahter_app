@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/src/domain/models/feels_like.dart';
 import 'package:weather_app/src/domain/models/temperature.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/temperature_info.dart';
+import 'package:weather_app/src/resources/theme/app_text_theme.dart';
 import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,7 +20,7 @@ class TemperatureWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
         children: [
-          Text(LocaleKeys.temperature.tr()),
+          Text(LocaleKeys.temperature.tr(),style: AppTextTheme.headline3),
           TemperatureInfo(
             timeOfDay: LocaleKeys.morning.tr(),
             temperature: temperature.morning,

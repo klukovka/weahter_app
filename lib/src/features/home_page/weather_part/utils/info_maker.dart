@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/src/domain/models/weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/temperature_info.dart';
 import 'package:weather_app/src/features/home_page/weather_part/widgets/weather_widget.dart';
+import 'package:weather_app/src/resources/theme/app_text_theme.dart';
 import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -17,8 +18,14 @@ class InfoMaker {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(name),
-            Text('$value $unit'),
+            Text(
+              name,
+              style: AppTextTheme.headline4,
+            ),
+            Text(
+              '$value $unit',
+              style: AppTextTheme.headline4,
+            ),
           ],
         ),
       );
@@ -66,7 +73,9 @@ class InfoMaker {
       );
 
   static List<Widget> weatherList(List<Weather> weather) {
-    final _weatherList = <Widget>[Text(LocaleKeys.weather.tr())];
+    final _weatherList = <Widget>[
+      Text(LocaleKeys.weather.tr(), style: AppTextTheme.headline3)
+    ];
     for (final item in weather) {
       _weatherList.add(WeatherWidget(item));
     }

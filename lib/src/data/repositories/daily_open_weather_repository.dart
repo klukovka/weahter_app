@@ -12,13 +12,8 @@ class DailyOpenWeatherRepository implements DailyWeatherRepository {
   Future<List<DailyWeather>> getDailyWeather(Coordinates coordinates) async {
     final dailyWeather =
         (await openWeatherApi.fetchWeather('hourly', coordinates))['daily'];
-    LocalStorage().saveEntity('lastfetchDailyWeather', dailyWeather);
-      print('''
-    
-    
-    ${await LocalStorage().fetchDailyWeather()}
-    
-    ''');
+    await LocalStorage().saveEntity('lastfetchDailyWeather', dailyWeather);
+ 
     final dailyWeatherMapped = dailyWeather.map<DailyWeather>(
       (daily) => JsonParser.parseJsonToDailyWeather(daily),
     );

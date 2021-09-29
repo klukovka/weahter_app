@@ -8,15 +8,13 @@ class WeatherPartBloc extends Bloc<WeatherPartEvent, WeatherPartState> {
   WeatherPartBloc(
     this._dailyWeatherInteractor,
     this._hourlyWeatherInteractor,
-  ) : super(new WeatherPartState());
+  ) : super(const WeatherPartState());
 
   final GetDailyWeatherInteractor _dailyWeatherInteractor;
   final GetHourlyWeatherInteractor _hourlyWeatherInteractor;
 
   @override
   Stream<WeatherPartState> mapEventToState(WeatherPartEvent event) async* {
-    print('WeatherPartBloc');
-
     yield state.copyWith(loading: true);
 
     if (event is WeatherPartCoordinateEvent) {
@@ -43,7 +41,6 @@ class WeatherPartBloc extends Bloc<WeatherPartEvent, WeatherPartState> {
 
   Stream<WeatherPartState> _mapModeEventToState(
       WeatherPartModeEvent event) async* {
-    print(state);
     try {
       yield state.copyWith(weatherMode: event.weatherMode);
     } catch (error) {

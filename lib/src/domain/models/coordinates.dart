@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Coordinates extends Equatable {
-  Coordinates(this.latitude, this.longitude);
+  const Coordinates(this.latitude, this.longitude);
   final num latitude;
   final num longitude;
   @override

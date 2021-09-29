@@ -10,13 +10,7 @@ class CityOpenWeatherRepository implements CityRepository {
   @override
   Future<List<City>> getCities(Coordinates coordinates) async {
     final cities = (await openWeatherApi.fetchCities(coordinates))['list'];
-    LocalStorage().saveEntity('lastfetchCity', cities);
-    print('''
-    
-    
-    ${await LocalStorage().fetchCity()}
-    
-    ''');
+    await LocalStorage().saveEntity('lastfetchCity', cities);
     final mappedCities =
         cities.map<City>((city) => JsonParser.parseJsonToCity(city));
     return mappedCities.toList();

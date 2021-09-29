@@ -21,25 +21,26 @@ class CityPart
     return addListener(
       child: Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: observe(builder: (context, state) {
           if (state is CityPartLoadingState) {
-            return WeatherAppLoader();
+            return const WeatherAppLoader();
           }
           if (state is CityPartErrorState) {
             return WeatherAppError(state.error);
           }
           if (state is CityPartLoadedState) {
+            final coordinates = _parseCoodrinatesToString(state.coordinates);
             return ListTile(
               title: Text('${LocaleKeys.city.tr()}: ${state.city.name}'),
               subtitle: Text(
-                '${LocaleKeys.coordinates.tr()}:\n${_parseCoodrinatesToString(state.coordinates)}',
+                '${LocaleKeys.coordinates.tr()}\n:$coordinates',
               ),
               trailing: Text(state.city.country),
             );
           }
 
-          return SizedBox();
+          return const SizedBox();
         }),
       ),
       listener: (context, state) {
@@ -57,7 +58,9 @@ class CityPart
         coordinates.latitude > 0 ? LocaleKeys.n.tr() : LocaleKeys.s.tr();
     final longitude =
         coordinates.longitude > 0 ? LocaleKeys.e.tr() : LocaleKeys.w.tr();
-    return '${_absNum(coordinates.latitude)} $latitude; ${_absNum(coordinates.longitude)} $longitude';
+    final absLatitude = _absNum(coordinates.latitude);
+    final absLongitude = _absNum(coordinates.longitude);
+    return '$absLatitude $latitude; $absLongitude $longitude';
   }
 
   num _absNum(num value) {

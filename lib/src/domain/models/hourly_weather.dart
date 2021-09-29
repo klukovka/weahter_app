@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_app/src/domain/models/weather.dart';
 
 class HourlyWeather extends Equatable {
-  HourlyWeather({
+  const HourlyWeather({
     required this.clouds,
     required this.dewPoint,
     required this.dt,

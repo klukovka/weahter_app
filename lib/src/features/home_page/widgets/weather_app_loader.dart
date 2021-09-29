@@ -9,7 +9,7 @@ class WeatherAppLoader extends StatelessWidget {
       alignment: Alignment.center,
       height: 50,
       width: 50,
-      child: CircularProgressIndicator(),
+      child: const CircularProgressIndicator(),
     );
   }
 }

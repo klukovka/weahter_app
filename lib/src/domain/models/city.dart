@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 
 class City extends Equatable {
-  City({
+  const City({
     required this.country,
     required this.id,
     required this.name,

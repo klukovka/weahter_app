@@ -67,8 +67,7 @@ class _HomePageState extends State<HomePage> {
     late ConnectivityResult result;
     try {
       result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
-      print(e.toString());
+    } on PlatformException catch (_) {
       return;
     }
     if (!mounted) {
@@ -81,11 +80,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> _updateConnectionStatus(ConnectivityResult result) async {
     setState(() {
       _connectionStatus = result;
-      print(_connectionStatus);
       cityBloc.close();
       weatherBloc.close();
-      print(cityBloc.isClosed);
-      print(weatherBloc.isClosed);
       if (_connectionStatus == ConnectivityResult.none) {
         cityBloc = CityPartBloc(GetCityInteractor(CityLocalRepository()),
             GetCoordinatesInteractor(CoordinatesLocalRepository()));
@@ -102,8 +98,6 @@ class _HomePageState extends State<HomePage> {
           GetHourlyWeatherInteractor(HourlyOpenWeatherRepository()),
         );
       }
-       print(cityBloc.isClosed);
-      print(weatherBloc.isClosed);
     });
   }
 
@@ -125,7 +119,7 @@ class _HomePageState extends State<HomePage> {
           key: ValueKey(_connectionStatus),
         ),
       ],
-      child: RefreshPage(),
+      child: const RefreshPage(),
     );
   }
 }

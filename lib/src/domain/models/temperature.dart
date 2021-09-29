@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Temperature extends Equatable {
-  Temperature({
+  const Temperature({
     required this.day,
     required this.evening,
     required this.max,

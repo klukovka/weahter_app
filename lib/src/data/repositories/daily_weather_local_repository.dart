@@ -9,7 +9,6 @@ class DailyWeatherLocalRepository implements DailyWeatherRepository {
 
   @override
   Future<List<DailyWeather>> getDailyWeather(Coordinates coordinates) async {
-    print('DailyWeatherLocalRepository');
     final dailyWeather = await localStorage.fetchDailyWeather();
     final dailyWeatherMapped = dailyWeather.map<DailyWeather>(
       (daily) => JsonParser.parseJsonToDailyWeather(daily),

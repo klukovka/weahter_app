@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class FeelsLike extends Equatable {
-  FeelsLike({
+  const FeelsLike({
     required this.day,
     required this.evening,
     required this.morning,

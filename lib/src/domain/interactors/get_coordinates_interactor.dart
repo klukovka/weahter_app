@@ -6,8 +6,8 @@ class GetCoordinatesInteractor {
   final CoordinatesRepository _repository;
 
   Future<Coordinates> call() async {
-    final coordinates =
-        (await _repository.getCoordinates()) ?? Coordinates(50.4333, 30.5167);
+    final coordinates = (await _repository.getCoordinates()) ??
+        const Coordinates(50.4333, 30.5167);
     return coordinates;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:weather_app/src/data/data_source/local_storage.dart';
 import 'package:weather_app/src/data/repositories/json_parser.dart';
-import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/models/hourly_weather.dart';
 import 'package:weather_app/src/domain/models/coordinates.dart';
 import 'package:weather_app/src/domain/repositories/hourly_weather_repository.dart';
 

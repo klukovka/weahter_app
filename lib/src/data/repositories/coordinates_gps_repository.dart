@@ -10,7 +10,7 @@ class CoordinatesGPSRepository implements CoordinatesRepository {
   @override
   Future<Coordinates?> getCoordinates() async {
     final coordinatesLocal = await localStorage.fetchCoordinates();
-    Location location = new Location();
+    final location = Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
 
@@ -37,16 +37,11 @@ class CoordinatesGPSRepository implements CoordinatesRepository {
         'latitude': currentLocation.latitude!,
         'longitude': currentLocation.longitude!,
       };
-      localStorage.saveEntity('lastfetchCoordinates', coordinates);
-      print('''
-    
-    
-    ${await LocalStorage().fetchCoordinates()}
-    
-    ''');
+      await localStorage.saveEntity('lastfetchCoordinates', coordinates);
+
       return Coordinates(currentLocation.latitude!, currentLocation.longitude!);
     } catch (error) {
-      throw error;
+      rethrow;
     }
   }
 }

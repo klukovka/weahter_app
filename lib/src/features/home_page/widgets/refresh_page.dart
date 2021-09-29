@@ -27,21 +27,18 @@ class RefreshPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(LocaleKeys.weatherApp.tr()),
-          actions: [
-            
+          actions: const[            
             ModePopUpMenu(),
           ],
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+          children: const[
             Flexible(
               child: CityPart(),
-              flex: 1,
             ),
             Flexible(
-              child: WeatherPart(),
               flex: 4,
+              child: WeatherPart(),
             )
           ],
         ),

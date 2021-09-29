@@ -8,7 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 class InfoMaker {
   static Widget rowInfo(
     String name,
-    dynamic value, {
+    value, {
     String unit = '',
     double horizontalPadding = 15.0,
   }) =>
@@ -37,7 +37,7 @@ class InfoMaker {
         horizontalPadding: horizontalPadding,
       );
     }
-    return SizedBox();
+    return const SizedBox();
   }
 
   static Widget shortInfo(num temperature, num feelsLike, int clouds,
@@ -67,9 +67,10 @@ class InfoMaker {
 
   static List<Widget> weatherList(List<Weather> weather) {
     final _weatherList = <Widget>[Text(LocaleKeys.weather.tr())];
-    weather.forEach((weather) {
-      _weatherList.add(WeatherWidget(weather));
-    });
+    for (final item in weather) {
+      _weatherList.add(WeatherWidget(item));
+    }
+
     return _weatherList;
   }
 }

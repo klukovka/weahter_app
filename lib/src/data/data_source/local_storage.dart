@@ -40,10 +40,10 @@ class LocalStorage {
     }
   }
 
-  Future<void> saveEntity(String key, dynamic entity) async {
+  Future<void> saveEntity(String key, entity) async {
     final _sharedPreferences = await SharedPreferences.getInstance();
 
     final json = jsonEncode(entity);
-    _sharedPreferences.setString(key, json);
+    await _sharedPreferences.setString(key, json);
   }
 }

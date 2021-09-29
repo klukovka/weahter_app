@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/src/domain/models/hourlyWeather.dart';
+import 'package:weather_app/src/domain/models/hourly_weather.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/date_time_mapper.dart';
 import 'package:weather_app/src/features/home_page/weather_part/utils/info_maker.dart';
 import 'package:weather_app/src/resources/translations/locale_keys.g.dart';

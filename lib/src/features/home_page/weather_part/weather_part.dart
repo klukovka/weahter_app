@@ -25,7 +25,7 @@ class WeatherPart extends StatelessWidget {
     return Container(
       child: observe(builder: (context, state) {
         if (state.loading) {
-          return WeatherAppLoader();
+          return const WeatherAppLoader();
         }
         if (state.error != null) {
           return WeatherAppError(state.error!);
@@ -39,7 +39,7 @@ class WeatherPart extends StatelessWidget {
           return HourlyWeatherListWidget(state.hourlyWeather!);
         }
       
-        return SizedBox();
+        return const SizedBox();
       }),
     );
   }

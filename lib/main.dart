@@ -26,9 +26,11 @@ Future<void> main() async {
   await dot_env.dotenv.load();
 
   await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage((message) async {
-    await Firebase.initializeApp();
-  });
+  try {
+    FirebaseMessaging.onBackgroundMessage((message) async {
+      await Firebase.initializeApp();
+    });
+  } catch (_) {}
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<

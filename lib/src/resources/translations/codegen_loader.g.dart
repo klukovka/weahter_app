@@ -59,7 +59,18 @@ class CodegenLoader extends AssetLoader{
   "s": "S",
   "e": "E",
   "w": "W",
-  "download": "You have not download forecast yet"
+  "download": "You have not download forecast yet",
+  "name": "Name",
+  "email": "Email",
+  "logOut": "Log out",
+  "settings": "Settings",
+  "user": "User",
+  "wentWrong": "Something went wrong",
+  "singIn": "Sing in with Google",
+  "language": "Language",
+  "russian": "Russian",
+  "english": "English",
+  "currentLanguage": "English"
 };
 static const Map<String,dynamic> ru = {
   "hourlyWeather": "Погода на 48 часов",
@@ -106,7 +117,18 @@ static const Map<String,dynamic> ru = {
   "s": "ю.ш.",
   "e": "в.д.",
   "w": "з.д.",
-  "download": "Вы еще не загружали прогноз погоды"
+  "download": "Вы еще не загружали прогноз погоды",
+  "name": "Имя",
+  "email": "Почта",
+  "logOut": "Выйти",
+  "settings": "Настройки",
+  "user": "Пользователь",
+  "wentWrong": "Что-то пошло не так",
+  "singIn": "Войти с Google",
+  "language": "Язык",
+  "russian": "Русский",
+  "english": "Английский",
+  "currentLanguage": "Русский"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ru": ru};
 }

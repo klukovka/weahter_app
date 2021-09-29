@@ -6,6 +6,7 @@ import 'package:weather_app/src/features/home_page/widgets/weather_app_loader.da
 import 'package:weather_app/src/features/settings_screen/google_sign_in_provider.dart';
 import 'package:weather_app/src/features/settings_screen/user_widgets/auth_user.dart';
 import 'package:weather_app/src/features/settings_screen/user_widgets/nonauth_user.dart';
+import 'package:weather_app/src/features/settings_screen/widgets/language_chooser.dart';
 import 'package:weather_app/src/resources/translations/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -22,7 +23,7 @@ class SettingsScreen extends StatelessWidget {
       body: Container(
         child: ListView(
           children: [
-            Text(LocaleKeys.settings.tr()),
+            Text(LocaleKeys.user.tr(), textAlign: TextAlign.center,),
             StreamBuilder<User?>(
                 stream: FirebaseAuth.instance.authStateChanges(),
                 builder: (context, snapshot) {
@@ -42,6 +43,7 @@ class SettingsScreen extends StatelessWidget {
                   }
                 }),
             Divider(),
+            LanguageChooser(),
           ],
         ),
       ),

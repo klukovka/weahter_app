@@ -1,6 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class LocaleKeys {
+abstract class  LocaleKeys {
   static const hourlyWeather = 'hourlyWeather';
   static const dailyWeather = 'dailyWeather';
   static const weatherApp = 'weatherApp';
@@ -46,4 +46,16 @@ abstract class LocaleKeys {
   static const e = 'e';
   static const w = 'w';
   static const download = 'download';
+  static const name = 'name';
+  static const email = 'email';
+  static const logOut = 'logOut';
+  static const settings = 'settings';
+  static const user = 'user';
+  static const wentWrong = 'wentWrong';
+  static const singIn = 'singIn';
+  static const language = 'language';
+  static const russian = 'russian';
+  static const english = 'english';
+  static const currentLanguage = 'currentLanguage';
+
 }

@@ -34,9 +34,10 @@ class CityPart
             return ListTile(
               title: Text('${LocaleKeys.city.tr()}: ${state.city.name}'),
               subtitle: Text(
-                '${LocaleKeys.coordinates.tr()}\n:$coordinates',
+                '${LocaleKeys.coordinates.tr()}:\n$coordinates',
               ),
               trailing: Text(state.city.country),
+              isThreeLine: true,
             );
           }
 

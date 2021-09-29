@@ -28,7 +28,7 @@ class WeatherPartBloc extends Bloc<WeatherPartEvent, WeatherPartState> {
       WeatherPartCoordinateEvent event) async* {
     try {
       final daily = await _dailyWeatherInteractor(event.coordinates);
-      final hourly = await _hourlyWeatherInteractor(event.coordinates);
+      final hourly = await _hourlyWeatherInteractor(event.coordinates);      
       yield state.copyWith(
         hourlyWeather: hourly,
         coordinates: event.coordinates,

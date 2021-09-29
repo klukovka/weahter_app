@@ -21,36 +21,40 @@ class RefreshPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LiquidPullToRefresh(
-      onRefresh: () async {
-        sendEvent<CityPartBloc, CityPartEvent>(context, CityPartEvent());
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(LocaleKeys.weatherApp.tr()),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const SettingsScreen();
-                  }));
-                },
-                icon: const Icon(Icons.settings)),
-            const ModePopUpMenu(),
-          ],
+    final textTheme = Theme.of(context).textTheme;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          LocaleKeys.weatherApp.tr(),
+          style: textTheme.headline1,
         ),
-        body: Column(
-          children: const [
-            Flexible(
-              child: CityPart(),
-            ),
-            Flexible(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return const SettingsScreen();
+                }));
+              },
+              icon: const Icon(Icons.settings)),
+          const ModePopUpMenu(),
+        ],
+      ),
+      body: Column(
+        children: [
+          const Flexible(
+            child: CityPart(),
+          ),
+          LiquidPullToRefresh(
+            onRefresh: () async {
+              sendEvent<CityPartBloc, CityPartEvent>(context, CityPartEvent());
+            },
+            child: const Flexible(
               flex: 4,
               child: WeatherPart(),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

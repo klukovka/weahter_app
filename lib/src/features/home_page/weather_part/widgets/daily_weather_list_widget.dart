@@ -7,11 +7,14 @@ class DailyWeatherListWidget extends StatelessWidget {
   final List<DailyWeather> dailyWeather;
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
       itemBuilder: (context, index) {
         return DailyWeatherWidget(dailyWeather[index]);
       },
       itemCount: dailyWeather.length,
+      separatorBuilder: (_, __) {
+        return const Divider();
+      },
     );
   }
 }

@@ -7,19 +7,33 @@ class LanguageChooser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return Column(
       children: [
-        Text('${LocaleKeys.language.tr()}: ${LocaleKeys.currentLanguage.tr()}'),
-        ElevatedButton(
-            onPressed: () async {
-              await context.setLocale(const Locale('en'));
-            },
-            child: Text(LocaleKeys.english.tr())),
-        ElevatedButton(
-            onPressed: () async {
-              await context.setLocale(const Locale('ru'));
-            },
-            child: Text(LocaleKeys.russian.tr())),
+        Text(
+          '${LocaleKeys.language.tr()}: ${LocaleKeys.currentLanguage.tr()}',
+          style: textTheme.headline3,
+        ),
+        _languageButton(context, 'en', LocaleKeys.english.tr()),
+        _languageButton(context, 'ru', LocaleKeys.russian.tr()),
+      ],
+    );
+  }
+
+  Widget _languageButton(
+    BuildContext context,
+    String locale,
+    String tr,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: ElevatedButton(
+              onPressed: () async {
+                await context.setLocale(Locale(locale));
+              },
+              child: Text(tr)),
+        ),
       ],
     );
   }
